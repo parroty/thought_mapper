@@ -1,31 +1,31 @@
-<%- model_class = Topic -%>
+<%- model_class = ViewPoint -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+  <h1>
+    <%= @topic.title %> - View Points
+  </h1>
 </div>
 <table class="table table-striped">
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:title) %></th>
-      <th><%= model_class.human_attribute_name(:description) %></th>
-      <th><%= model_class.human_attribute_name(:view_points) %></th>
+      <th><%= model_class.human_attribute_name(:order) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
   <tbody>
-    <% @topics.each do |topic| %>
+    <% @view_points.each do |view_point| %>
       <tr>
-        <td><%= link_to topic.id, topic_path(topic) %></td>
-        <td><%= topic.title %></td>
-        <td><%= topic.description %></td>
-        <td><%= link_to "#{topic.view_points_count} view points", topic_view_points_path(topic) %></td>
-        <td><%=l topic.created_at %></td>
+        <td><%= link_to view_point.id, topic_view_point_path(view_point.topic, view_point) %></td>
+        <td><%= view_point.title %></td>
+        <td><%= view_point.order %></td>
+        <td><%=l view_point.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_topic_path(topic), :class => 'btn btn-default btn-xs' %>
+                      edit_topic_view_point_path(view_point.topic, view_point), :class => 'btn btn-default btn-xs' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      topic_path(topic),
+                      topic_view_points_path(view_point.topic),
                       :method => :delete,
                       :data => {
                         :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))
@@ -38,5 +38,8 @@
 </table>
 
 <%= link_to t('.new', :default => t("helpers.links.new")),
-            new_topic_path,
+            new_topic_view_point_path,
             :class => 'btn btn-primary' %>
+
+<%= link_to t('.back', :default => t("helpers.links.back")),
+              topics_path, :class => 'btn btn-default'  %>

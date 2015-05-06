@@ -1,0 +1,10 @@
+<%= simple_form_for [@topic, @view_point], :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :title %>
+  <%= error_span(@view_point[:title]) %>
+  <%= f.input :order %>
+  <%= error_span(@view_point[:order]) %>
+
+  <%= f.button :submit, :class => 'btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                topic_view_points_path(@topic), :class => 'btn btn-default' %>
+<% end %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150506070555) do
+ActiveRecord::Schema.define(version: 20150506071342) do
 
   create_table "titles", force: :cascade do |t|
     t.string   "description"
@@ -22,8 +22,9 @@ ActiveRecord::Schema.define(version: 20150506070555) do
   create_table "topics", force: :cascade do |t|
     t.string   "title"
     t.string   "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.integer  "view_points_count", default: 0, null: false
   end
 
   create_table "view_points", force: :cascade do |t|
@@ -31,6 +32,9 @@ ActiveRecord::Schema.define(version: 20150506070555) do
     t.integer  "order"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "topic_id"
   end
+
+  add_index "view_points", ["topic_id"], name: "index_view_points_on_topic_id"
 
 end
