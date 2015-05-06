@@ -20,7 +20,7 @@
         <td><%= topic.title %></td>
         <td><%= topic.description %></td>
         <td><%= link_to "#{topic.view_points_count} view points", topic_view_points_path(topic) %></td>
-        <td><%=l topic.created_at %></td>
+        <td><%= to_display_time(topic.created_at) %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_topic_path(topic), :class => 'btn btn-default btn-xs' %>
