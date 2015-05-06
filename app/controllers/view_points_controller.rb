@@ -7,6 +7,9 @@ class ViewPointsController < ApplicationController
     @view_points = @topic.view_points
   end
 
+  def show
+  end
+
   def new
     @view_point = ViewPoint.new(topic_id: params[:topic_id])
     @topic = @view_point.topic
@@ -16,16 +19,15 @@ class ViewPointsController < ApplicationController
   end
 
   def create
-    @view_point = ViewPoint.new(view_point_params.merge({topic_id: params[:topic_id]}))
+    params_with_topic_id = view_point_params.merge({topic_id: params[:topic_id]})
+    @view_point = ViewPoint.new(params_with_topic_id)
     @topic = @view_point.topic
 
     respond_to do |format|
       if @view_point.save
         format.html { redirect_to topic_view_points_path(@topic), notice: 'ViewPoint was successfully created.' }
-        format.json { render :show, status: :created, location: @view_point }
       else
         format.html { render :new }
-        format.json { render json: @view_point.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -36,7 +38,6 @@ class ViewPointsController < ApplicationController
         format.html { redirect_to topic_view_points_path(@topic), notice: 'Topic was successfully updated.' }
       else
         format.html { render :edit }
-        format.json { render json: @view_point.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -45,7 +46,6 @@ class ViewPointsController < ApplicationController
     @view_point.destroy
     respond_to do |format|
       format.html { redirect_to topic_view_points_path(@topic), notice: 'Topic was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 
