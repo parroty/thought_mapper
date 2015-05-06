@@ -22,8 +22,24 @@
         <td><%= view_point.priority %></td>
         <td><%=l view_point.created_at %></td>
         <td>
+          <% unless view_point.first? %>
+            <%= link_to move_higher_topic_view_point_path(view_point.topic, view_point),
+                  :method => :post, :id => :view_point do %>
+              <i class="fa fa-arrow-up"></i>
+            <% end %>
+          <% end %>
+
+          <% unless view_point.last? %>
+            <%= link_to move_lower_topic_view_point_path(view_point.topic, view_point),
+                  :method => :post, :id => :view_point do %>
+              <i class="fa fa-arrow-down"></i>
+            <% end %>
+          <% end %>
+
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_topic_view_point_path(view_point.topic, view_point), :class => 'btn btn-default btn-xs' %>
+                      edit_topic_view_point_path(view_point.topic, view_point),
+                      :class => 'btn btn-default btn-xs' %>
+
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       topic_view_point_path(view_point.topic, view_point),
                       :method => :delete,

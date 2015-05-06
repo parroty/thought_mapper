@@ -1,5 +1,6 @@
 class ViewPointsController < ApplicationController
-  before_action :set_view_point_and_topic, only: [:show, :edit, :update, :destroy]
+  before_action :set_view_point_and_topic,
+    only: [:show, :edit, :update, :destroy, :move_higher, :move_lower]
 
   def index
     @topic = Topic.find(params[:topic_id])
@@ -46,6 +47,16 @@ class ViewPointsController < ApplicationController
       format.html { redirect_to topic_view_points_path(@topic), notice: 'Topic was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def move_higher
+    @view_point.move_higher
+    redirect_to topic_view_points_path(@topic)
+  end
+
+  def move_lower
+    @view_point.move_lower
+    redirect_to topic_view_points_path(@topic)
   end
 
 private
