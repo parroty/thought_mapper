@@ -22,8 +22,8 @@ group :development do
 end
 
 group :test do
-  gem "simplecov", require: false
   gem "coveralls", require: false
+  gem "simplecov", require: false
 end
 
 group :development, :test do
@@ -39,7 +39,8 @@ group :development, :test do
   gem "web-console", "~> 2.0"
 end
 
+gem "acts_as_list"
 gem "kaminari"
-gem "unicorn"
 gem "simple_form"
 gem "twitter-bootstrap-rails"
+gem "unicorn"

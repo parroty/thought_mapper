@@ -1,3 +1,3 @@
 class Topic < ActiveRecord::Base
-  has_many :view_points, dependent: :destroy
+  has_many :view_points, -> { order(:position) }, dependent: :destroy
 end

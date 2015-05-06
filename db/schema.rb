@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150506071342) do
+ActiveRecord::Schema.define(version: 20150506113448) do
 
   create_table "titles", force: :cascade do |t|
     t.string   "description"
@@ -29,10 +29,11 @@ ActiveRecord::Schema.define(version: 20150506071342) do
 
   create_table "view_points", force: :cascade do |t|
     t.string   "title"
-    t.integer  "order"
+    t.integer  "priority"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "topic_id"
+    t.integer  "position"
   end
 
   add_index "view_points", ["topic_id"], name: "index_view_points_on_topic_id"
