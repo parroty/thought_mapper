@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root :to => redirect("/topics")
+
   resources :topics do
     resources :actions
     resources :view_points do
