@@ -2,6 +2,9 @@
   <%= f.input :title %>
   <%= error_span(@view_point[:title]) %>
 
+  <%= f.input :priority %>
+  <%= error_span(@view_point[:priority]) %>
+
   <%= f.button :submit, :class => 'btn-primary' %>
   <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
                 topic_view_points_path(@topic), :class => 'btn btn-default' %>

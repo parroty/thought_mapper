@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root :to => redirect("/topics")
 
   resources :topics do
-    resources :actions
+    resources :candidates
     resources :view_points do
       member do
         post :move_higher

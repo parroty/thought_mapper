@@ -66,6 +66,6 @@ private
   end
 
   def view_point_params
-    params.require(:view_point).permit(:title, :order)
+    params.require(:view_point).permit(:title, :priority)
   end
 end
