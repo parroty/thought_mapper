@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150507153602) do
+ActiveRecord::Schema.define(version: 20150509125700) do
 
   create_table "candidates", force: :cascade do |t|
     t.string   "title"
@@ -22,6 +22,21 @@ ActiveRecord::Schema.define(version: 20150507153602) do
 
   add_index "candidates", ["topic_id"], name: "index_candidates_on_topic_id"
 
+  create_table "factors", force: :cascade do |t|
+    t.string   "title"
+    t.string   "description"
+    t.integer  "score"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "view_point_id"
+    t.integer  "candidate_id"
+    t.integer  "topic_id"
+  end
+
+  add_index "factors", ["candidate_id"], name: "index_factors_on_candidate_id"
+  add_index "factors", ["topic_id"], name: "index_factors_on_topic_id"
+  add_index "factors", ["view_point_id"], name: "index_factors_on_view_point_id"
+
   create_table "topics", force: :cascade do |t|
     t.string   "title"
     t.string   "description"
@@ -29,6 +44,7 @@ ActiveRecord::Schema.define(version: 20150507153602) do
     t.datetime "updated_at",                    null: false
     t.integer  "view_points_count", default: 0, null: false
     t.integer  "candidates_count",  default: 0, null: false
+    t.integer  "factors_count",     default: 0, null: false
   end
 
   create_table "view_points", force: :cascade do |t|

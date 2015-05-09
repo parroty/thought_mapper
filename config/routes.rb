@@ -9,5 +9,6 @@ Rails.application.routes.draw do
         post :move_lower
       end
     end
+    resources :factors
   end
 end

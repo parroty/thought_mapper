@@ -1,0 +1,19 @@
+<%= simple_form_for [@topic, @factor], :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :title %>
+  <%= error_span(@factor[:title]) %>
+
+  <%= f.input :description %>
+  <%= error_span(@factor[:description]) %>
+
+  <%= f.input :view_point do %>
+    <%= f.select :view_point_id, @view_points.map { |r| [r.title, r.id] } %>
+  <% end %>
+
+  <%= f.input :candidate do %>
+    <%= f.select :candidate_id, @candidates.map { |r| [r.title, r.id] } %>
+  <% end %>
+
+  <%= f.button :submit, :class => 'btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                topic_factors_path(@topic), :class => 'btn btn-default' %>
+<% end %>
