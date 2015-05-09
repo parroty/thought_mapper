@@ -8,9 +8,7 @@
       <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:title) %></th>
       <th><%= model_class.human_attribute_name(:description) %></th>
-      <th><%= model_class.human_attribute_name(:view_points) %></th>
-      <th><%= model_class.human_attribute_name(:candidates) %></th>
-      <th><%= model_class.human_attribute_name(:factors) %></th>
+      <th><%= model_class.human_attribute_name(:items) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
@@ -21,9 +19,11 @@
         <td><%= link_to topic.id, topic_path(topic) %></td>
         <td><%= topic.title %></td>
         <td><%= topic.description %></td>
-        <td><%= link_to "#{topic.view_points_count} view points", topic_view_points_path(topic) %></td>
-        <td><%= link_to "#{topic.candidates_count} candidates", topic_candidates_path(topic) %></td>
-        <td><%= link_to "#{topic.factors_count} factors", topic_factors_path(topic) %></td>
+        <td>
+          <%= link_to pluralize(topic.view_points_count, "view point"), topic_view_points_path(topic) %><br/>
+          <%= link_to pluralize(topic.candidates_count, "candidate"), topic_candidates_path(topic) %><br/>
+          <%= link_to pluralize(topic.factors_count, "factors"), topic_factors_path(topic) %>
+        </td>
         <td><%= to_display_time(topic.created_at) %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
