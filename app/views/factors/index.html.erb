@@ -7,7 +7,6 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:title) %></th>
       <th><%= model_class.human_attribute_name(:description) %></th>
       <th><%= model_class.human_attribute_name(:view_point) %></th>
@@ -19,8 +18,7 @@
   <tbody>
     <% @factors.each do |factor| %>
       <tr>
-        <td><%= link_to factor.id, topic_factor_path(factor.topic, factor) %></td>
-        <td><%= factor.title %></td>
+        <td><%= link_to factor.title, topic_factor_path(factor.topic, factor) %></td>
         <td><%= factor.description %></td>
         <td><%= factor.view_point.try(:title) %></td>
         <td><%= factor.candidate.try(:title) %></td>

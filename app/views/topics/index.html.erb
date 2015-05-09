@@ -5,7 +5,6 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:title) %></th>
       <th><%= model_class.human_attribute_name(:description) %></th>
       <th><%= model_class.human_attribute_name(:items) %></th>
@@ -16,8 +15,7 @@
   <tbody>
     <% @topics.each do |topic| %>
       <tr>
-        <td><%= link_to topic.id, topic_path(topic) %></td>
-        <td><%= topic.title %></td>
+        <td><%= link_to topic.title, topic_path(topic) %></td>
         <td><%= topic.description %></td>
         <td>
           <%= link_to pluralize(topic.view_points_count, "view point"), topic_view_points_path(topic) %><br/>

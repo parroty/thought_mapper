@@ -11,8 +11,8 @@
 </dl>
 
 <div class="panel panel-default">
-  <div class="panel-heading"><b>Factors</b></div>
-  <table class="table table-striped table-bordered">
+  <div class="panel-heading"><b>Factors Matrix</b></div>
+  <table class="table table-bordered">
     <tr>
       <th></th>
       <% @topic.candidates.each do |candidate| %>
@@ -26,7 +26,8 @@
         <% @topic.candidates.each do |candidate| %>
           <td>
             <ul>
-              <% @topic.factors.select { |f| f.view_point == view_point && f.candidate == candidate }.each do |factor| %>
+              <% factors = @topic.factors.select { |f| f.view_point == view_point && f.candidate == candidate } %>
+              <% factors.each do |factor| %>
                 <li><%= factor.title %></li>
               <% end %>
             </ul>

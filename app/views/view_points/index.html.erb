@@ -7,7 +7,6 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:title) %></th>
       <th><%= model_class.human_attribute_name(:priority) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
@@ -17,8 +16,7 @@
   <tbody>
     <% @view_points.each do |view_point| %>
       <tr>
-        <td><%= link_to view_point.id, topic_view_point_path(view_point.topic, view_point) %></td>
-        <td><%= view_point.title %></td>
+        <td><%= link_to view_point.title, topic_view_point_path(view_point.topic, view_point) %></td>
         <td><%= view_point.priority %></td>
         <td><%= to_display_time(view_point.created_at) %></td>
         <td>
