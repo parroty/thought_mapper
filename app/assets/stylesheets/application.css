@@ -17,3 +17,8 @@
 body {
   font: 11pt Avenir, 'Segoe UI', 'Lucida Grande', Lucida, Verdana, sans-serif;
 }
+
+ul {
+  padding-left: 20px;
+  margin-bottom: 0px;
+}

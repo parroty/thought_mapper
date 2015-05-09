@@ -10,6 +10,32 @@
   <dd><%= @topic.description %></dd>
 </dl>
 
+<div class="panel panel-default">
+  <div class="panel-heading"><b>Factors</b></div>
+  <table class="table table-striped table-bordered">
+    <tr>
+      <th></th>
+      <% @topic.candidates.each do |candidate| %>
+      <th><%= candidate.title %></th>
+      <% end %>
+    </tr>
+
+    <% @topic.view_points.each do |view_point| %>
+      <tr>
+        <td><%= view_point.title %></td>
+        <% @topic.candidates.each do |candidate| %>
+          <td>
+            <ul>
+              <% @topic.factors.select { |f| f.view_point == view_point && f.candidate == candidate }.each do |factor| %>
+                <li><%= factor.title %></li>
+              <% end %>
+            </ul>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+</div>
 <%= link_to t('.back', :default => t("helpers.links.back")),
               topics_path, :class => 'btn btn-default'  %>
 <%= link_to t('.edit', :default => t("helpers.links.edit")),
