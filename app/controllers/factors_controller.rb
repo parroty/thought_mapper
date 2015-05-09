@@ -1,6 +1,6 @@
 class FactorsController < ApplicationController
-  before_action :set_factor_and_topic,
-    only: [:show, :edit, :update, :destroy]
+  before_action :set_factor_and_topic, only: [
+    :show, :edit, :update, :destroy]
 
   def index
     @topic = Topic.find(params[:topic_id])
@@ -26,13 +26,12 @@ class FactorsController < ApplicationController
   end
 
   def create
-    params_with_topic_id = factor_params.merge({topic_id: params[:topic_id]})
-    @factor = Factor.new(params_with_topic_id)
-    @topic = @factor.topic
-
+    @factor = create_factor
     respond_to do |format|
       if @factor.save
-        format.html { redirect_to topic_factors_path(@topic), notice: 'Factor was successfully created.' }
+        path   = topic_factors_path(@factor.topic)
+        notice = "Factor was successfully created."
+        format.html { redirect_to path, notice: notice }
       else
         format.html { render :new }
       end
@@ -42,7 +41,8 @@ class FactorsController < ApplicationController
   def update
     respond_to do |format|
       if @factor.update(factor_params)
-        format.html { redirect_to topic_factors_path(@topic), notice: 'Factor was successfully updated.' }
+        notice = "Factor was successfully updated."
+        format.html { redirect_to topic_factors_path(@topic), notice: notice }
       else
         format.html { render :edit }
       end
@@ -52,17 +52,25 @@ class FactorsController < ApplicationController
   def destroy
     @factor.destroy
     respond_to do |format|
-      format.html { redirect_to topic_factors_path(@topic), notice: 'Factor was successfully destroyed.' }
+      notice = "Factor was successfully destroyed."
+      format.html { redirect_to topic_factors_path(@topic), notice: notice }
     end
   end
 
-private
+  private
+
   def set_factor_and_topic
     @factor = Factor.find(params[:id])
     @topic = @factor.topic
   end
 
+  def create_factor
+    params_with_topic_id = factor_params.merge(topic_id: params[:topic_id])
+    Factor.new(params_with_topic_id)
+  end
+
   def factor_params
-    params.require(:factor).permit(:title, :description, :view_point_id, :candidate_id)
+    params.require(:factor).permit(
+      :title, :description, :view_point_id, :candidate_id)
   end
 end

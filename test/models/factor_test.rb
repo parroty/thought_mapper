@@ -1,7 +1,6 @@
 require "test_helper"
 
 class FactorTest < ActiveSupport::TestCase
-
   def factor
     @factor ||= Factor.new
   end
@@ -9,5 +8,4 @@ class FactorTest < ActiveSupport::TestCase
   def test_valid
     assert factor.valid?
   end
-
 end

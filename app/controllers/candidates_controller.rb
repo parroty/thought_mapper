@@ -1,6 +1,6 @@
 class CandidatesController < ApplicationController
-  before_action :set_candidate_and_topic,
-    only: [:show, :edit, :update, :destroy]
+  before_action :set_candidate_and_topic, only: [
+    :show, :edit, :update, :destroy]
 
   def index
     @topic = Topic.find(params[:topic_id])
@@ -18,14 +18,18 @@ class CandidatesController < ApplicationController
   def edit
   end
 
-  def create
-    params_with_topic_id = action_params.merge({topic_id: params[:topic_id]})
-    @candidate = Candidate.new(params_with_topic_id)
-    @topic = @candidate.topic
+  def create_candidate
+    params_with_topic_id = action_params.merge(topic_id: params[:topic_id])
+    Candidate.new(params_with_topic_id)
+  end
 
+  def create
+    @candidate = create_candidate
     respond_to do |format|
       if @candidate.save
-        format.html { redirect_to topic_candidates_path(@topic), notice: 'Candidate was successfully created.' }
+        path   = topic_candidates_path(@candidate.topic)
+        notice = "Candidate was successfully created."
+        format.html { redirect_to path, notice: notice }
       else
         format.html { render :new }
       end
@@ -35,7 +39,9 @@ class CandidatesController < ApplicationController
   def update
     respond_to do |format|
       if @candidate.update(action_params)
-        format.html { redirect_to topic_candidates_path(@topic), notice: 'Topic was successfully updated.' }
+        path   = topic_candidates_path(@topic)
+        notice = "Topic was successfully updated."
+        format.html { redirect_to path, notice: notice }
       else
         format.html { render :edit }
       end
@@ -45,11 +51,14 @@ class CandidatesController < ApplicationController
   def destroy
     @candidate.destroy
     respond_to do |format|
-      format.html { redirect_to topic_candidates_path(@topic), notice: 'Topic was successfully destroyed.' }
+      path   = topic_candidates_path(@topic)
+      notice = "Topic was successfully destroyed."
+      format.html { redirect_to path, notice: notice }
     end
   end
 
-private
+  private
+
   def set_candidate_and_topic
     @candidate = Candidate.find(params[:id])
     @topic = @candidate.topic

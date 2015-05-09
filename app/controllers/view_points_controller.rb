@@ -1,6 +1,6 @@
 class ViewPointsController < ApplicationController
-  before_action :set_view_point_and_topic,
-    only: [:show, :edit, :update, :destroy, :move_higher, :move_lower]
+  before_action :set_view_point_and_topic, only: [
+    :show, :edit, :update, :destroy, :move_higher, :move_lower]
 
   def index
     @topic = Topic.find(params[:topic_id])
@@ -19,13 +19,12 @@ class ViewPointsController < ApplicationController
   end
 
   def create
-    params_with_topic_id = view_point_params.merge({topic_id: params[:topic_id]})
-    @view_point = ViewPoint.new(params_with_topic_id)
-    @topic = @view_point.topic
-
+    @view_point = create_view_point
     respond_to do |format|
       if @view_point.save
-        format.html { redirect_to topic_view_points_path(@topic), notice: 'ViewPoint was successfully created.' }
+        path   = topic_view_points_path(@view_point.topic)
+        notice = "ViewPoint was successfully created."
+        format.html { redirect_to path, notice: notice }
       else
         format.html { render :new }
       end
@@ -35,7 +34,9 @@ class ViewPointsController < ApplicationController
   def update
     respond_to do |format|
       if @view_point.update(view_point_params)
-        format.html { redirect_to topic_view_points_path(@topic), notice: 'Topic was successfully updated.' }
+        path   = topic_view_points_path(@topic)
+        notice = "ViewPoint was successfully updated."
+        format.html { redirect_to path, notice: notice }
       else
         format.html { render :edit }
       end
@@ -45,7 +46,9 @@ class ViewPointsController < ApplicationController
   def destroy
     @view_point.destroy
     respond_to do |format|
-      format.html { redirect_to topic_view_points_path(@topic), notice: 'Topic was successfully destroyed.' }
+      path   = topic_view_points_path(@topic)
+      notice = "ViewPoint was successfully destroyed."
+      format.html { redirect_to(path, notice: notice) }
     end
   end
 
@@ -59,10 +62,16 @@ class ViewPointsController < ApplicationController
     redirect_to topic_view_points_path(@topic)
   end
 
-private
+  private
+
   def set_view_point_and_topic
     @view_point = ViewPoint.find(params[:id])
     @topic = @view_point.topic
+  end
+
+  def create_view_point
+    params_with_topic_id = view_point_params.merge(topic_id: params[:topic_id])
+    ViewPoint.new(params_with_topic_id)
   end
 
   def view_point_params

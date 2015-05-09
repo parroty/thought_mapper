@@ -1,7 +1,6 @@
 require "test_helper"
 
 class TopicsControllerTest < ActionController::TestCase
-
   def topic
     @topic ||= topics :one
   end
@@ -18,8 +17,10 @@ class TopicsControllerTest < ActionController::TestCase
   end
 
   def test_create
-    assert_difference('Topic.count') do
-      post :create, topic: { description: topic.description, title: topic.title }
+    assert_difference("Topic.count") do
+      post :create, topic: {
+        description: topic.description, title: topic.title
+      }
     end
 
     assert_redirected_to topic_path(assigns(:topic))
@@ -36,12 +37,14 @@ class TopicsControllerTest < ActionController::TestCase
   end
 
   def test_update
-    put :update, id: topic, topic: { description: topic.description, title: topic.title }
+    put :update, id: topic, topic: {
+      description: topic.description, title: topic.title
+    }
     assert_redirected_to topic_path(assigns(:topic))
   end
 
   def test_destroy
-    assert_difference('Topic.count', -1) do
+    assert_difference("Topic.count", -1) do
       delete :destroy, id: topic
     end
 
