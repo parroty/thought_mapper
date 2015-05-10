@@ -5,6 +5,7 @@
                 input_html: { class: "col-md-10" } %>
     <%= error_span(@topic[:title]) %>
   </div>
+
   <div class="row">
     <%= f.input :description,
                 label_html: { class: "col-md-2" },
@@ -12,6 +13,13 @@
     <%= error_span(@topic[:description]) %>
   </div>
 
+  <div class="row">
+    <%= f.input :comment,
+                as: :text,
+                label_html: { class: "col-md-2" },
+                input_html: { class: "col-md-10" } %>
+    <%= error_span(@topic[:comment]) %>
+  </div>
 
   <div class="form-actions">
     <%= f.button :submit, "Save", :class => "btn btn-primary" %>

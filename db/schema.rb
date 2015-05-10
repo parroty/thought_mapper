@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150510151654) do
+ActiveRecord::Schema.define(version: 20150510153834) do
 
   create_table "candidates", force: :cascade do |t|
     t.string   "title"
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 20150510151654) do
     t.integer  "view_points_count", default: 0, null: false
     t.integer  "candidates_count",  default: 0, null: false
     t.integer  "factors_count",     default: 0, null: false
+    t.text     "comment"
   end
 
   create_table "view_points", force: :cascade do |t|
