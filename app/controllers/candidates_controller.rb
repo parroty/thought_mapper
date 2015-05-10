@@ -1,6 +1,6 @@
 class CandidatesController < ApplicationController
   before_action :set_candidate_and_topic, only: [
-    :show, :edit, :update, :destroy]
+    :show, :edit, :update, :destroy, :move_higher, :move_lower]
 
   def index
     @topic = Topic.find(params[:topic_id])
@@ -55,6 +55,16 @@ class CandidatesController < ApplicationController
       notice = "Topic was successfully destroyed."
       format.html { redirect_to path, notice: notice }
     end
+  end
+
+  def move_higher
+    @candidate.move_higher
+    redirect_to topic_path(@topic)
+  end
+
+  def move_lower
+    @candidate.move_lower
+    redirect_to topic_path(@topic)
   end
 
   private

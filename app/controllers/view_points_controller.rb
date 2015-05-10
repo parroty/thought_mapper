@@ -54,12 +54,12 @@ class ViewPointsController < ApplicationController
 
   def move_higher
     @view_point.move_higher
-    redirect_to topic_view_points_path(@topic)
+    redirect_to topic_path(@topic)
   end
 
   def move_lower
     @view_point.move_lower
-    redirect_to topic_view_points_path(@topic)
+    redirect_to topic_path(@topic)
   end
 
   private

@@ -53,3 +53,7 @@ i {
 .matrix-header {
   width: 100px;
 }
+
+.inactive {
+  color: #bbbbbb;
+}

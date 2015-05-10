@@ -26,16 +26,54 @@
     </tr>
     <tr>
       <% @topic.candidates.each do |candidate| %>
-      <td><%= link_to candidate.title, edit_topic_candidate_path(@topic, candidate) %></td>
+      <td>
+        <% if candidate.first? %>
+            <i class="fa fa-arrow-left inactive"></i>
+        <% else %>
+          <%= link_to move_higher_topic_candidate_path(candidate.topic, candidate),
+                :method => :post, :id => :candidate do %>
+            <i class="fa fa-arrow-left"></i>
+          <% end %>
+        <% end %>
+
+        <% if candidate.last? %>
+            <i class="fa fa-arrow-right inactive"></i>
+        <% else %>
+          <%= link_to move_lower_topic_candidate_path(candidate.topic, candidate),
+                :method => :post, :id => :candidate do %>
+            <i class="fa fa-arrow-right"></i>
+          <% end %>
+        <% end %>
+
+        <%= link_to candidate.title, edit_topic_candidate_path(@topic, candidate) %>
+      </td>
       <% end %>
     </tr>
 
     <% @topic.view_points.each_with_index do |view_point, index| %>
       <tr>
         <% if index == 0 %>
-          <td rowspan="2" class="matrix-header"><b>View Points</b></td>
+          <td rowspan="<%= @topic.view_points.count %>" class="matrix-header"><b>View Points</b></td>
         <% end %>
         <td>
+          <% if view_point.first? %>
+              <i class="fa fa-arrow-up inactive"></i>
+          <% else %>
+            <%= link_to move_higher_topic_view_point_path(view_point.topic, view_point),
+                  :method => :post, :id => :view_point do %>
+              <i class="fa fa-arrow-up"></i>
+            <% end %>
+          <% end %>
+
+          <% if view_point.last? %>
+              <i class="fa fa-arrow-down inactive"></i>
+          <% else %>
+            <%= link_to move_lower_topic_view_point_path(view_point.topic, view_point),
+                  :method => :post, :id => :view_point do %>
+              <i class="fa fa-arrow-down"></i>
+            <% end %>
+          <% end %>
+
           <%= link_to view_point.title, edit_topic_view_point_path(@topic, view_point) %>
         </td>
         <% @topic.candidates.each do |candidate| %>

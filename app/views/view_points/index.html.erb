@@ -31,21 +31,6 @@
                         :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))
                       },
                       :class => 'btn btn-xs btn-danger' %>
-
-
-          <% unless view_point.first? %>
-            <%= link_to move_higher_topic_view_point_path(view_point.topic, view_point),
-                  :method => :post, :id => :view_point do %>
-              <i class="fa fa-arrow-up"></i>
-            <% end %>
-          <% end %>
-
-          <% unless view_point.last? %>
-            <%= link_to move_lower_topic_view_point_path(view_point.topic, view_point),
-                  :method => :post, :id => :view_point do %>
-              <i class="fa fa-arrow-down"></i>
-            <% end %>
-          <% end %>
         </td>
       </tr>
     <% end %>
