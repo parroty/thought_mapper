@@ -49,3 +49,7 @@ form {
 i {
   vertical-align: middle;
 }
+
+.matrix-header {
+  width: 100px;
+}

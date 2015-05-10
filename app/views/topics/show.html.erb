@@ -21,14 +21,20 @@
   <div class="panel-heading"><b>Matrix</b></div>
   <table class="table table-bordered table-hover">
     <tr>
-      <td></td>
+      <td rowspan="2" colspan="2"></td>
+      <td align="center" colspan="2"><b>Candidates</b></td>
+    </tr>
+    <tr>
       <% @topic.candidates.each do |candidate| %>
       <td><%= link_to candidate.title, edit_topic_candidate_path(@topic, candidate) %></td>
       <% end %>
     </tr>
 
-    <% @topic.view_points.each do |view_point| %>
+    <% @topic.view_points.each_with_index do |view_point, index| %>
       <tr>
+        <% if index == 0 %>
+          <td rowspan="2" class="matrix-header"><b>View Points</b></td>
+        <% end %>
         <td>
           <%= link_to view_point.title, edit_topic_view_point_path(@topic, view_point) %>
         </td>
@@ -59,20 +65,20 @@
 
 <div class="form-actions">
   <%= link_to "New View Point",
-              new_topic_view_point_path(@topic), :class => "btn btn-primary" %>
+              new_topic_view_point_path(@topic), :class => "btn btn-success" %>
 
   <%= link_to "New Candidate",
-              new_topic_candidate_path(@topic), :class => "btn btn-primary" %>
+              new_topic_candidate_path(@topic), :class => "btn btn-success" %>
 
   <%= link_to "New Factor",
-              new_topic_factor_path(@topic), :class => "btn btn-primary" %>
+              new_topic_factor_path(@topic), :class => "btn btn-success" %>
 </div>
 
 <div class="form-actions">
-  <%= link_to "Edit",
+  <%= link_to "Edit Topic",
               edit_topic_path(@topic), :class => "btn btn-default" %>
 
-  <%= link_to "Destroy",
+  <%= link_to "Destroy Topic",
               topic_path(@topic),
               :method => "delete",
               :data => { :confirm => "Are you sure?" },
