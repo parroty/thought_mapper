@@ -39,7 +39,7 @@
               <% factors.each do |factor| %>
                 <li>
                   <%= link_to factor.title, '#',
-                    class: "has-popover",
+                    "class": "has-popover",
                     "data-toggle": "popover",
                     "data-content": factor.description %>
 
@@ -57,14 +57,27 @@
   </table>
 </div>
 
-<%= link_to "Edit",
-            edit_topic_path(@topic), :class => "btn btn-default" %>
+<div class="form-actions">
+  <%= link_to "New View Point",
+              new_topic_view_point_path(@topic), :class => "btn btn-primary" %>
 
-<%= link_to "Destroy",
-            topic_path(@topic),
-            :method => "delete",
-            :data => { :confirm => "Are you sure?" },
-            :class => "btn btn-danger" %>
+  <%= link_to "New Candidate",
+              new_topic_candidate_path(@topic), :class => "btn btn-primary" %>
 
-<%= link_to "Back",
-            topics_path, :class => "btn btn-default" %>
+  <%= link_to "New Factor",
+              new_topic_factor_path(@topic), :class => "btn btn-primary" %>
+</div>
+
+<div class="form-actions">
+  <%= link_to "Edit",
+              edit_topic_path(@topic), :class => "btn btn-default" %>
+
+  <%= link_to "Destroy",
+              topic_path(@topic),
+              :method => "delete",
+              :data => { :confirm => "Are you sure?" },
+              :class => "btn btn-danger" %>
+
+  <%= link_to "Back",
+              topics_path, :class => "btn btn-default" %>
+</div>

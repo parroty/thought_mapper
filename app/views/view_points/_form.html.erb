@@ -12,12 +12,14 @@
     <%= error_span(@view_point[:priority]) %>
   </div>
   <div class="form-actions">
-    <%= f.button :submit, "Update", :class => "btn btn-primary" %>
+    <%= f.button :submit, "Save", :class => "btn btn-primary" %>
 
-    <%= link_to "Destroy", topic_path(@view_point.topic),
-                  :method => "delete",
-                  :data => { :confirm => "Are you sure?" },
-                  :class => "btn btn-danger" %>
+    <% if @view_point.id %>
+      <%= link_to "Destroy", topic_view_point_path(@view_point.topic, @view_point),
+                    :method => "delete",
+                    :data => { :confirm => "Are you sure?" },
+                    :class => "btn btn-danger" %>
+    <% end %>
 
     <%= link_to "Cancel", topic_path(@topic), :class => "btn btn-default" %>
   </div>
