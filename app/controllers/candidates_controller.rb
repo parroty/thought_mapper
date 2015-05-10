@@ -27,7 +27,7 @@ class CandidatesController < ApplicationController
     @candidate = create_candidate
     respond_to do |format|
       if @candidate.save
-        path   = topic_candidates_path(@candidate.topic)
+        path   = topic_path(@candidate.topic)
         notice = "Candidate was successfully created."
         format.html { redirect_to path, notice: notice }
       else
@@ -39,7 +39,7 @@ class CandidatesController < ApplicationController
   def update
     respond_to do |format|
       if @candidate.update(action_params)
-        path   = topic_candidates_path(@topic)
+        path   = topic_path(@topic)
         notice = "Topic was successfully updated."
         format.html { redirect_to path, notice: notice }
       else
@@ -51,7 +51,7 @@ class CandidatesController < ApplicationController
   def destroy
     @candidate.destroy
     respond_to do |format|
-      path   = topic_candidates_path(@topic)
+      path   = topic_path(@topic)
       notice = "Topic was successfully destroyed."
       format.html { redirect_to path, notice: notice }
     end

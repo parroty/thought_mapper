@@ -29,9 +29,8 @@ class FactorsController < ApplicationController
     @factor = create_factor
     respond_to do |format|
       if @factor.save
-        path   = topic_factors_path(@factor.topic)
         notice = "Factor was successfully created."
-        format.html { redirect_to path, notice: notice }
+        format.html { redirect_to topic_path(@factor.topic), notice: notice }
       else
         format.html { render :new }
       end
@@ -42,7 +41,7 @@ class FactorsController < ApplicationController
     respond_to do |format|
       if @factor.update(factor_params)
         notice = "Factor was successfully updated."
-        format.html { redirect_to topic_factors_path(@topic), notice: notice }
+        format.html { redirect_to topic_path(@topic), notice: notice }
       else
         format.html { render :edit }
       end
@@ -53,7 +52,7 @@ class FactorsController < ApplicationController
     @factor.destroy
     respond_to do |format|
       notice = "Factor was successfully destroyed."
-      format.html { redirect_to topic_factors_path(@topic), notice: notice }
+      format.html { redirect_to topic_path(@topic), notice: notice }
     end
   end
 

@@ -1,34 +1,42 @@
 <%- model_class = Topic -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+  <h1>Topic</h1>
 </div>
 
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:title) %>:</strong></dt>
-  <dd><%= @topic.title %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
-  <dd><%= @topic.description %></dd>
-</dl>
+<table class="table table-bordered">
+  <tr>
+    <th class="col-md-2 active">Title</th>
+    <td class="col-md-10"><%= @topic.title %></td>
+  </tr>
+  <tr>
+    <th class="col-md-2 active">Description</th>
+    <td class="col-md-10"><%= @topic.description %></td>
+  </tr>
+</table>
 
 <div class="panel panel-default">
   <div class="panel-heading"><b>Factors Matrix</b></div>
-  <table class="table table-bordered">
+  <table class="table table-bordered table-hover">
     <tr>
-      <th></th>
+      <td></td>
       <% @topic.candidates.each do |candidate| %>
-      <th><%= candidate.title %></th>
+      <td><%= link_to candidate.title, edit_topic_candidate_path(@topic, candidate) %></td>
       <% end %>
     </tr>
 
     <% @topic.view_points.each do |view_point| %>
       <tr>
-        <td><%= view_point.title %></td>
+        <td>
+          <%= link_to view_point.title, edit_topic_view_point_path(@topic, view_point) %>
+        </td>
         <% @topic.candidates.each do |candidate| %>
           <td>
             <ul>
               <% factors = @topic.factors.select { |f| f.view_point == view_point && f.candidate == candidate } %>
               <% factors.each do |factor| %>
-                <li><%= factor.title %></li>
+                <li>
+                  <%= link_to factor.title, edit_topic_factor_path(@topic, factor) %>
+                </li>
               <% end %>
             </ul>
           </td>
