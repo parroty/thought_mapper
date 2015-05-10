@@ -38,8 +38,16 @@
               <% factors = @topic.factors.select { |f| f.view_point == view_point && f.candidate == candidate } %>
               <% factors.each do |factor| %>
                 <li>
-                  <%= link_to factor.title, edit_topic_factor_path(@topic, factor) %>
+                  <%= link_to factor.title, '#',
+                    class: "has-popover",
+                    "data-toggle": "popover",
+                    "data-content": factor.description %>
+
+                  <%= link_to edit_topic_factor_path(@topic, factor) do %>
+                    <i class="fa fa-edit"></i>
+                  <% end %>
                 </li>
+
               <% end %>
             </ul>
           </td>

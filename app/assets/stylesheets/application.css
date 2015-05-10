@@ -45,3 +45,7 @@ ul {
 form {
   margin: 10px;
 }
+
+i {
+  vertical-align: middle;
+}
