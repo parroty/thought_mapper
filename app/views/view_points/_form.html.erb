@@ -1,11 +1,24 @@
-<%= simple_form_for [@topic, @view_point], :html => { :class => 'form-horizontal' } do |f| %>
-  <%= f.input :title %>
-  <%= error_span(@view_point[:title]) %>
+<%= simple_form_for [@topic, @view_point], :html => { :class => "form-horizontal" } do |f| %>
+  <div class="row">
+    <%= f.input :title,
+                label_html: { class: "col-md-2" },
+                input_html: { class: "col-md-10" } %>
+    <%= error_span(@view_point[:title]) %>
+  </div>
+  <div class="row">
+    <%= f.input :priority,
+                label_html: { class: "col-md-2" },
+                input_html: { class: "col-md-10" } %>
+    <%= error_span(@view_point[:priority]) %>
+  </div>
+  <div class="form-actions">
+    <%= f.button :submit, "Update", :class => "btn btn-primary" %>
 
-  <%= f.input :priority %>
-  <%= error_span(@view_point[:priority]) %>
+    <%= link_to "Destroy", topic_path(@view_point.topic),
+                  :method => "delete",
+                  :data => { :confirm => "Are you sure?" },
+                  :class => "btn btn-danger" %>
 
-  <%= f.button :submit, :class => 'btn-primary' %>
-  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                topic_path(@topic), :class => 'btn btn-default' %>
+    <%= link_to "Cancel", topic_path(@topic), :class => "btn btn-default" %>
+  </div>
 <% end %>

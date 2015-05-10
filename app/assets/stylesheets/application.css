@@ -19,7 +19,12 @@ body {
 }
 
 .page-header {
-  margin: 0px;
+  margin-top: 0px;
+  margin-bottom: 16px;
+}
+
+.row {
+  padding: 8px;
 }
 
 h1 {
@@ -31,4 +36,12 @@ h1 {
 ul {
   padding-left: 20px;
   margin-bottom: 0px;
+}
+
+.form-actions {
+  margin-top: 10px;
+}
+
+form {
+  margin: 10px;
 }

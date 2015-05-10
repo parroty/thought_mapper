@@ -1,19 +1,35 @@
-<%= simple_form_for [@topic, @factor], :html => { :class => 'form-horizontal' } do |f| %>
-  <%= f.input :title %>
-  <%= error_span(@factor[:title]) %>
+<%= simple_form_for [@topic, @factor], :html => { :class => "form-horizontal" } do |f| %>
+  <div class="row">
+    <%= f.input :title,
+                label_html: { class: "col-md-2" },
+                input_html: { class: "col-md-10" } %>
+    <%= error_span(@factor[:title]) %>
+  </div>
+  <div class="row">
+    <%= f.input :description,
+                label_html: { class: "col-md-2" },
+                input_html: { class: "col-md-10" } %>
+    <%= error_span(@factor[:description]) %>
+  </div>
+  <div class="row">
+    <%= f.input :view_point,
+                label_html: { class: "col-md-2" } do %>
+      <%= f.select :view_point_id, @view_points.map { |r| [r.title, r.id] }, {}, { class: "col-md-10" } %>
+    <% end %>
+  </div>
+  <div class="row">
+    <%= f.input :candidate,
+                label_html: { class: "col-md-2" } do %>
+      <%= f.select :candidate_id, @candidates.map { |r| [r.title, r.id] }, {}, { class: "col-md-10" } %>
+    <% end %>
+  </div>
 
-  <%= f.input :description %>
-  <%= error_span(@factor[:description]) %>
-
-  <%= f.input :view_point do %>
-    <%= f.select :view_point_id, @view_points.map { |r| [r.title, r.id] } %>
-  <% end %>
-
-  <%= f.input :candidate do %>
-    <%= f.select :candidate_id, @candidates.map { |r| [r.title, r.id] } %>
-  <% end %>
-
-  <%= f.button :submit, :class => 'btn-primary' %>
-  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                topic_path(@topic), :class => 'btn btn-default' %>
+  <div class="form-actions">
+    <%= f.button :submit, "Update", :class => "btn btn-primary" %>
+    <%= link_to "Destroy", topic_path(@factor.topic),
+                  :method => "delete",
+                  :data => { :confirm => "Are you sure?" },
+                  :class => "btn btn-danger" %>
+    <%= link_to "Cancel", topic_path(@topic), :class => "btn btn-default" %>
+  </div>
 <% end %>

@@ -1,10 +1,20 @@
-<%= simple_form_for @topic, :html => { :class => 'form-horizontal' } do |f| %>
-  <%= f.input :title %>
-  <%= error_span(@topic[:title]) %>
-  <%= f.input :description %>
-  <%= error_span(@topic[:description]) %>
+<%= simple_form_for @topic, :html => { :class => "form-horizontal" } do |f| %>
+  <div class="row">
+    <%= f.input :title,
+                label_html: { class: "col-md-2" },
+                input_html: { class: "col-md-10" } %>
+    <%= error_span(@topic[:title]) %>
+  </div>
+  <div class="row">
+    <%= f.input :description,
+                label_html: { class: "col-md-2" },
+                input_html: { class: "col-md-10" } %>
+    <%= error_span(@topic[:description]) %>
+  </div>
 
-  <%= f.button :submit, :class => 'btn-primary' %>
-  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                topics_path, :class => 'btn btn-default' %>
+
+  <div class="form-actions">
+    <%= f.button :submit, "Update", :class => "btn btn-primary" %>
+    <%= link_to "Cancel", topic_path(@topic), :class => "btn btn-default" %>
+  </div>
 <% end %>
