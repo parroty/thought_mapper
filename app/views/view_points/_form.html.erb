@@ -1,14 +1,14 @@
 <%= simple_form_for [@topic, @view_point], :html => { :class => "form-horizontal" } do |f| %>
   <div class="row">
     <%= f.input :title,
-                label_html: { class: "col-md-2" },
-                input_html: { class: "col-md-10" } %>
+                label_html: { class: "col-xs-12 col-sm-1" },
+                input_html: { class: "col-xs-12 col-sm-11" } %>
     <%= error_span(@view_point[:title]) %>
   </div>
   <div class="row">
     <%= f.input :priority,
-                label_html: { class: "col-md-2" },
-                input_html: { class: "col-md-10" } %>
+                label_html: { class: "col-xs-12 col-sm-1" },
+                input_html: { class: "col-xs-12 col-sm-11" } %>
     <%= error_span(@view_point[:priority]) %>
   </div>
   <div class="form-actions">

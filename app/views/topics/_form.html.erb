@@ -1,23 +1,23 @@
 <%= simple_form_for @topic, :html => { :class => "form-horizontal" } do |f| %>
   <div class="row">
     <%= f.input :title,
-                label_html: { class: "col-md-2" },
-                input_html: { class: "col-md-10" } %>
+                label_html: { class: "col-xs-12 col-sm-2" },
+                input_html: { class: "col-xs-12 col-sm-10" } %>
     <%= error_span(@topic[:title]) %>
   </div>
 
   <div class="row">
     <%= f.input :description,
-                label_html: { class: "col-md-2" },
-                input_html: { class: "col-md-10" } %>
+                label_html: { class: "col-xs-12 col-sm-2" },
+                input_html: { class: "col-xs-12 col-sm-10" } %>
     <%= error_span(@topic[:description]) %>
   </div>
 
   <div class="row">
     <%= f.input :comment,
                 as: :text,
-                label_html: { class: "col-md-2" },
-                input_html: { class: "col-md-10" } %>
+                label_html: { class: "col-xs-12 col-sm-2" },
+                input_html: { class: "col-xs-12 col-sm-10" } %>
     <%= error_span(@topic[:comment]) %>
   </div>
 

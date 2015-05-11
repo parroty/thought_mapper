@@ -51,9 +51,13 @@ i {
 }
 
 .matrix-header {
-  width: 100px;
+  width: 10%;
 }
 
 .inactive {
   color: #bbbbbb;
+}
+
+input {
+  padding: 5px;
 }

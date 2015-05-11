@@ -1,8 +1,8 @@
 <%= simple_form_for [@topic, @candidate], :html => { :class => "form-horizontal" } do |f| %>
   <div class="row">
     <%= f.input :title,
-                label_html: { class: "col-md-2" },
-                input_html: { class: "col-md-10" } %>
+                label_html: { class: "col-xs-12 col-sm-2" },
+                input_html: { class: "col-xs-12 col-sm-10" } %>
     <%= error_span(@candidate[:title]) %>
   </div>
   <div class="form-actions">

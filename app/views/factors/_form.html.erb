@@ -1,26 +1,32 @@
 <%= simple_form_for [@topic, @factor], :html => { :class => "form-horizontal" } do |f| %>
   <div class="row">
     <%= f.input :title,
-                label_html: { class: "col-md-2" },
-                input_html: { class: "col-md-10" } %>
+                label_html: { class: "col-xs-12 col-sm-2" },
+                input_html: { class: "col-xs-12 col-sm-10" } %>
     <%= error_span(@factor[:title]) %>
   </div>
   <div class="row">
     <%= f.input :description,
-                label_html: { class: "col-md-2" },
-                input_html: { class: "col-md-10" } %>
+                label_html: { class: "col-xs-12 col-sm-2" },
+                input_html: { class: "col-xs-12 col-sm-10" } %>
     <%= error_span(@factor[:description]) %>
   </div>
   <div class="row">
     <%= f.input :view_point,
-                label_html: { class: "col-md-2" } do %>
-      <%= f.select :view_point_id, @view_points.map { |r| [r.title, r.id] }, {}, { class: "col-md-10" } %>
+                label_html: { class: "col-xs-12 col-sm-2" } do %>
+      <%= f.select :view_point_id,
+                   @view_points.map { |r| [r.title, r.id] },
+                   {},
+                   { class: "col-xs-12 col-sm-10" } %>
     <% end %>
   </div>
   <div class="row">
     <%= f.input :candidate,
-                label_html: { class: "col-md-2" } do %>
-      <%= f.select :candidate_id, @candidates.map { |r| [r.title, r.id] }, {}, { class: "col-md-10" } %>
+                label_html: { class: "col-xs-12 col-sm-2" } do %>
+      <%= f.select :candidate_id,
+                   @candidates.map { |r| [r.title, r.id] },
+                   {},
+                   { class: "col-xs-12 col-sm-10" } %>
     <% end %>
   </div>
 
