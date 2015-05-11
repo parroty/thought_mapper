@@ -86,13 +86,15 @@
               <% factors = @topic.factors.select { |f| f.view_point == view_point && f.candidate == candidate } %>
               <% factors.each do |factor| %>
                 <li>
-                  <%= link_to factor.title, '#',
-                    "class": "has-popover",
-                    "data-toggle": "popover",
-                    "data-content": factor.description %>
+                  <%= link_to factor.title, edit_topic_factor_path(@topic, factor) %>
 
-                  <%= link_to edit_topic_factor_path(@topic, factor) do %>
-                    <i class="fa fa-comment-o"></i>
+                  <% if factor.description != "" %>
+                    <%= link_to '#',
+                      "class": "has-popover",
+                      "data-toggle": "popover",
+                      "data-content": factor.description do %>
+                      <i class="fa fa-comment-o"></i>
+                    <% end %>
                   <% end %>
                 </li>
 
