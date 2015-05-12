@@ -22,11 +22,15 @@
 </div>
 
 <div class="panel panel-default">
-  <div class="panel-heading"><b>Matrix</b></div>
+  <div class="panel-heading"><b>Matrix of </b> <%= link_to pluralize(@topic.factors_count, "factors"), topic_factors_path(@topic) %></div>
   <table class="table table-bordered table-hover">
     <tr>
       <td rowspan="2" colspan="2"></td>
-      <td align="center" colspan="2"><b>Candidates</b></td>
+      <td align="center" colspan="2">
+        <%= link_to topic_candidates_path(@topic) do %>
+          <%= pluralize(@topic.candidates_count, "candidate") %>
+        <% end %>
+      </td>
     </tr>
     <tr>
       <% @topic.candidates.each do |candidate| %>
@@ -57,7 +61,11 @@
     <% @topic.view_points.each_with_index do |view_point, index| %>
       <tr>
         <% if index == 0 %>
-          <td rowspan="<%= @topic.view_points.count %>" class="matrix-header"><b>View Points</b></td>
+          <td rowspan="<%= @topic.view_points.count %>" class="matrix-header">
+            <%= link_to topic_view_points_path(@topic) do %>
+              <%= pluralize(@topic.view_points_count, "view point") %>
+            <% end %>
+          </td>
         <% end %>
         <td>
           <% if view_point.first? %>
