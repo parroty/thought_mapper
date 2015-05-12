@@ -73,6 +73,6 @@ class FactorsController < ApplicationController
 
   def factor_params
     params.require(:factor).permit(
-      :title, :description, :view_point_id, :candidate_id)
+      :title, :description, :score, :view_point_id, :candidate_id)
   end
 end

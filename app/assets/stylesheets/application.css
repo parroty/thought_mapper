@@ -61,3 +61,12 @@ i {
 input {
   padding: 5px;
 }
+
+span.middle {
+  font-weight: bold;
+}
+
+span.high {
+  font-weight: bold;
+  color: red;
+}

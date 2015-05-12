@@ -86,7 +86,9 @@
               <% factors = @topic.factors.select { |f| f.view_point == view_point && f.candidate == candidate } %>
               <% factors.each do |factor| %>
                 <li>
-                  <%= link_to factor.title, edit_topic_factor_path(@topic, factor) %>
+                  <%= link_to edit_topic_factor_path(@topic, factor) do %>
+                    <span class="<%= factor.score_text %>"><%= factor.title %></span>
+                  <% end %>
 
                   <% if factor.description != "" %>
                     <%= link_to '#',
