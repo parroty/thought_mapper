@@ -97,9 +97,11 @@
                     <% end %>
                   <% end %>
                 </li>
-
               <% end %>
             </ul>
+            <%= link_to new_topic_factor_path(@topic, view_point: view_point, candidate: candidate) do %>
+              <i class="fa fa-edit"></i>
+            <% end %>
           </td>
         <% end %>
       </tr>

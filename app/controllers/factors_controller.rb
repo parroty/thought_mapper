@@ -14,6 +14,9 @@ class FactorsController < ApplicationController
 
   def new
     @factor = Factor.new(topic_id: params[:topic_id])
+    @factor.view_point = ViewPoint.new(id: params[:view_point])
+    @factor.candidate  = Candidate.new(id: params[:candidate])
+
     @topic = @factor.topic
 
     @view_points = @topic.view_points
