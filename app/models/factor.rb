@@ -14,9 +14,9 @@ class Factor < ActiveRecord::Base
       end
     end
 
-    def self.text_of(score)
+    def self.name_of(score)
       if score = all.find { |name, value| value == score }
-        score.first.to_s.downcase
+        score.first.to_s
       else
         ""
       end
@@ -27,7 +27,7 @@ class Factor < ActiveRecord::Base
     Score.all
   end
 
-  def score_text
-    Score.text_of(score)
+  def score_name
+    Score.name_of(score)
   end
 end

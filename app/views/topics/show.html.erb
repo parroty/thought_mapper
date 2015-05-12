@@ -87,7 +87,7 @@
               <% factors.each do |factor| %>
                 <li>
                   <%= link_to edit_topic_factor_path(@topic, factor) do %>
-                    <span class="<%= factor.score_text %>"><%= factor.title %></span>
+                    <span class="<%= factor.score_name.downcase %>"><%= factor.title %></span>
                   <% end %>
 
                   <% if factor.description != "" %>
