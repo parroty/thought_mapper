@@ -8,9 +8,9 @@ class ApplicationController < ActionController::Base
   private
 
   def basic_authentication
-    if ENV['THOUGHT_MAPPER_USER'] && ENV['THOUGHT_MAPPER_PASS']
+    if ENV["THOUGHT_MAPPER_USER"] && ENV["THOUGHT_MAPPER_PASS"]
       authenticate_or_request_with_http_basic do |user, pass|
-        user == ENV['THOUGHT_MAPPER_USER'] && pass == ENV['THOUGHT_MAPPER_PASS']
+        user == ENV["THOUGHT_MAPPER_USER"] && pass == ENV["THOUGHT_MAPPER_PASS"]
       end
     end
   end
