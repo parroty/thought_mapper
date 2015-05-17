@@ -1,6 +1,6 @@
 require "test_helper"
 
-describe ViewPointsController do
+describe CandidatesController do
   before do
     @topic = Topic.create
   end

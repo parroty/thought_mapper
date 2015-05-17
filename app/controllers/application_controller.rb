@@ -8,9 +8,12 @@ class ApplicationController < ActionController::Base
   private
 
   def basic_authentication
-    if ENV["THOUGHT_MAPPER_USER"] && ENV["THOUGHT_MAPPER_PASS"]
+    env_user = ENV["THOUGHT_MAPPER_USER"]
+    env_pass = ENV["THOUGHT_MAPPER_PASS"]
+
+    if env_user && env_pass && !Rails.env.test?
       authenticate_or_request_with_http_basic do |user, pass|
-        user == ENV["THOUGHT_MAPPER_USER"] && pass == ENV["THOUGHT_MAPPER_PASS"]
+        user == env_user && pass == env_pass
       end
     end
   end
