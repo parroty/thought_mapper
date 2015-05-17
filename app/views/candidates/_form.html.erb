@@ -5,16 +5,19 @@
                 input_html: { class: "col-xs-12 col-sm-10" } %>
     <%= error_span(@candidate[:title]) %>
   </div>
+
   <div class="form-actions">
     <%= f.button :submit, "Save", :class => "btn btn-primary" %>
 
+    <%= link_to "Cancel", topic_path(@topic), :class => "btn btn-default" %>
+  </div>
+
+  <div class="form-actions">
     <% if @candidate.id %>
       <%= link_to "Destroy", topic_candidate_path(@candidate.topic, @candidate),
                     :method => "delete",
                     :data => { :confirm => "Are you sure?" },
                     :class => "btn btn-danger" %>
     <% end %>
-
-    <%= link_to "Cancel", topic_path(@topic), :class => "btn btn-default" %>
   </div>
 <% end %>

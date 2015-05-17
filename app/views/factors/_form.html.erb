@@ -42,6 +42,9 @@
   <div class="form-actions">
     <%= f.button :submit, "Save", :class => "btn btn-primary" %>
 
+    <%= link_to "Cancel", topic_path(@topic), :class => "btn btn-default" %>
+
+  <div class="form-actions">
     <% if @factor.id %>
       <%= link_to "Destroy",
                   topic_factor_path(@factor.topic, @factor),
@@ -49,7 +52,5 @@
                   :data => { :confirm => "Are you sure?" },
                   :class => "btn btn-danger" %>
     <% end %>
-
-    <%= link_to "Cancel", topic_path(@topic), :class => "btn btn-default" %>
   </div>
 <% end %>

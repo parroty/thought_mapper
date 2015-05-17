@@ -134,12 +134,14 @@
   <%= link_to "Edit Topic",
               edit_topic_path(@topic), :class => "btn btn-default" %>
 
+  <%= link_to "Back",
+              topics_path, :class => "btn btn-default" %>
+</div>
+
+<div class="form-actions">
   <%= link_to "Destroy Topic",
               topic_path(@topic),
               :method => "delete",
               :data => { :confirm => "Are you sure?" },
               :class => "btn btn-danger" %>
-
-  <%= link_to "Back",
-              topics_path, :class => "btn btn-default" %>
 </div>
