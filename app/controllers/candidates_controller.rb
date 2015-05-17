@@ -31,7 +31,7 @@ class CandidatesController < ApplicationController
         notice = "Candidate was successfully created."
         format.html { redirect_to path, notice: notice }
       else
-        format.html { render :new }
+        format.html { redirect_to new_topic_candidate_path(@candidate.topic) }
       end
     end
   end
@@ -43,7 +43,7 @@ class CandidatesController < ApplicationController
         notice = "Topic was successfully updated."
         format.html { redirect_to path, notice: notice }
       else
-        format.html { render :edit }
+        format.html { redirect_to edit_topic_candidate_path(@candidate.topic, @candidate) }
       end
     end
   end

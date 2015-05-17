@@ -2,7 +2,7 @@ require "test_helper"
 
 class CandidateTest < ActiveSupport::TestCase
   def candidate
-    @candidate ||= Candidate.new
+    @candidate ||= Candidate.new(title: "title")
   end
 
   def test_valid
