@@ -53,7 +53,9 @@
           <% end %>
         <% end %>
 
-        <%= link_to candidate.title, edit_topic_candidate_path(@topic, candidate), class: "candidate_link" %>
+        <%= link_to candidate.title,
+                    edit_topic_candidate_path(@topic, candidate),
+                    class: "candidate_link" %>
       </td>
       <% end %>
     </tr>
@@ -72,7 +74,7 @@
               <i class="fa fa-arrow-up inactive"></i>
           <% else %>
             <%= link_to move_higher_topic_view_point_path(view_point.topic, view_point),
-                  :method => :post, :id => :view_point do %>
+                  :method => :post, :id => "view_point_move_higher_#{view_point.id}" do %>
               <i class="fa fa-arrow-up"></i>
             <% end %>
           <% end %>
@@ -81,12 +83,14 @@
               <i class="fa fa-arrow-down inactive"></i>
           <% else %>
             <%= link_to move_lower_topic_view_point_path(view_point.topic, view_point),
-                  :method => :post, :id => :view_point do %>
+                  :method => :post, :id => "view_point_move_lower_#{view_point.id}" do %>
               <i class="fa fa-arrow-down"></i>
             <% end %>
           <% end %>
 
-          <%= link_to view_point.title, edit_topic_view_point_path(@topic, view_point) %>
+          <%= link_to view_point.title,
+                      edit_topic_view_point_path(@topic, view_point),
+                      class: "view_point_link" %>
         </td>
         <% @topic.candidates.each do |candidate| %>
           <td>

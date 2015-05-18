@@ -26,7 +26,7 @@ class ViewPointsController < ApplicationController
         notice = "ViewPoint was successfully created."
         format.html { redirect_to path, notice: notice }
       else
-        format.html { render :new }
+        format.html { redirect_to new_topic_view_point_path(@view_point.topic) }
       end
     end
   end
@@ -38,7 +38,7 @@ class ViewPointsController < ApplicationController
         notice = "ViewPoint was successfully updated."
         format.html { redirect_to path, notice: notice }
       else
-        format.html { render :edit }
+        format.html { redirect_to edit_topic_view_point_path(@view_point.topic, @view_point) }
       end
     end
   end

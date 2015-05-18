@@ -1,6 +1,6 @@
 require "test_helper"
 
-describe "create candidate", :capybara do
+describe "operations for candidates", :capybara do
   before do
     @topic = Topic.create
     Candidate.delete_all
@@ -24,7 +24,7 @@ describe "create candidate", :capybara do
       Candidate.create(topic_id: @topic.id, title: "original_title")
     end
 
-    it "updates candidate title" do
+    it "updates candidate" do
       visit topic_path(@topic)
       click_link("original_title")
 
