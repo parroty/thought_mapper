@@ -2,7 +2,7 @@ require "test_helper"
 
 describe ViewPointsController do
   before do
-    @topic = Topic.create
+    @topic = Topic.create(title: "topic")
   end
 
   describe "index" do

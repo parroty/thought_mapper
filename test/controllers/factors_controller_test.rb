@@ -2,7 +2,7 @@ require "test_helper"
 
 describe FactorsController do
   before do
-    @topic = Topic.create
+    @topic = Topic.create(title: "title")
   end
 
   it "gets index" do

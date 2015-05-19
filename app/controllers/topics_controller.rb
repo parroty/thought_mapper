@@ -23,7 +23,7 @@ class TopicsController < ApplicationController
         notice = "Topic was successfully created."
         format.html { redirect_to @topic, notice: notice }
       else
-        format.html { render :new }
+        format.html { redirect_to new_topic_path }
       end
     end
   end
@@ -34,7 +34,7 @@ class TopicsController < ApplicationController
         notice = "Topic was successfully updated."
         format.html { redirect_to @topic, notice: notice }
       else
-        format.html { render :edit }
+        format.html { redirect_to edit_topic_path }
       end
     end
   end

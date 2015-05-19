@@ -2,7 +2,7 @@ require "test_helper"
 
 describe "operations for candidates", :capybara do
   before do
-    @topic = Topic.create
+    @topic = Topic.create(title: "title")
     Candidate.delete_all
   end
 

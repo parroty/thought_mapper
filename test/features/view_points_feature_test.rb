@@ -2,7 +2,7 @@ require "test_helper"
 
 describe "operations for viewpoints", :capybara do
   before do
-    @topic = Topic.create
+    @topic = Topic.create(title: "title")
     ViewPoint.delete_all
   end
 

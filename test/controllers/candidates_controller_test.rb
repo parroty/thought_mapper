@@ -2,7 +2,7 @@ require "test_helper"
 
 describe CandidatesController do
   before do
-    @topic = Topic.create
+    @topic = Topic.create(title: "title")
   end
 
   describe "index" do
