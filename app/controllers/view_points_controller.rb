@@ -38,7 +38,8 @@ class ViewPointsController < ApplicationController
         notice = "ViewPoint was successfully updated."
         format.html { redirect_to path, notice: notice }
       else
-        format.html { redirect_to edit_topic_view_point_path(@view_point.topic, @view_point) }
+        path = edit_topic_view_point_path(@view_point.topic, @view_point)
+        format.html { redirect_to path }
       end
     end
   end

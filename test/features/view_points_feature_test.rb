@@ -53,24 +53,24 @@ describe "operations for viewpoints", :capybara do
 
     it "moves view point lower" do
       visit topic_path(@topic)
-      assert_equal ["title1", "title2"], view_point_links
+      assert_equal %w(title1 title2), view_point_links
 
       find("a#view_point_move_lower_#{@view_point1.id}").click
-      assert_equal ["title2", "title1"], view_point_links
+      assert_equal %w(title2 title1), view_point_links
     end
 
     it "moves candidate higher" do
       visit topic_path(@topic)
-      assert_equal ["title1", "title2"], view_point_links
+      assert_equal %w(title1 title2), view_point_links
 
       find("a#view_point_move_higher_#{@view_point2.id}").click
-      assert_equal ["title2", "title1"], view_point_links
+      assert_equal %w(title2 title1), view_point_links
     end
   end
 
   private
 
   def view_point_links
-    all(".view_point_link").map { |e| e.text }
+    all(".view_point_link").map(&:text)
   end
 end

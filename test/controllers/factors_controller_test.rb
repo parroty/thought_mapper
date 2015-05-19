@@ -43,12 +43,14 @@ describe FactorsController do
     end
 
     it "updates candidate and gets redirected to topic page" do
-      patch :update, id: @factor.id, topic_id: @topic.id, factor: { title: "updated_title" }
+      patch :update, id: @factor.id,
+                     topic_id: @topic.id, factor: { title: "updated_title" }
       assert_redirected_to topic_path(@topic)
     end
 
     it "redirects to new page if title is empty" do
-      patch :update, id: @factor.id, topic_id: @topic.id, factor: { title: "" }
+      patch :update, id: @factor.id,
+                     topic_id: @topic.id, factor: { title: "" }
       assert_redirected_to edit_topic_factor_path(@topic, @factor)
     end
   end

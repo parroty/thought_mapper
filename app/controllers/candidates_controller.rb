@@ -43,7 +43,8 @@ class CandidatesController < ApplicationController
         notice = "Topic was successfully updated."
         format.html { redirect_to path, notice: notice }
       else
-        format.html { redirect_to edit_topic_candidate_path(@candidate.topic, @candidate) }
+        path = edit_topic_candidate_path(@candidate.topic, @candidate)
+        format.html { redirect_to path }
       end
     end
   end

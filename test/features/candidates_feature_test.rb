@@ -53,24 +53,24 @@ describe "operations for candidates", :capybara do
 
     it "moves candidate lower" do
       visit topic_path(@topic)
-      assert_equal ["title1", "title2"], candidate_links
+      assert_equal %w(title1 title2), candidate_links
 
       find("a#candidate_move_lower_#{@candidate1.id}").click
-      assert_equal ["title2", "title1"], candidate_links
+      assert_equal %w(title2 title1), candidate_links
     end
 
     it "moves candidate higher" do
       visit topic_path(@topic)
-      assert_equal ["title1", "title2"], candidate_links
+      assert_equal %w(title1 title2), candidate_links
 
       find("a#candidate_move_higher_#{@candidate2.id}").click
-      assert_equal ["title2", "title1"], candidate_links
+      assert_equal %w(title2 title1), candidate_links
     end
   end
 
   private
 
   def candidate_links
-    all(".candidate_link").map { |e| e.text }
+    all(".candidate_link").map(&:text)
   end
 end

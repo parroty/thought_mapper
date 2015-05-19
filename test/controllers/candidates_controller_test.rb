@@ -42,12 +42,14 @@ describe CandidatesController do
     end
 
     it "updates candidate and gets redirected to topic page" do
-      patch :update, id: @candidate.id, topic_id: @topic.id, candidate: { title: "updated_title" }
+      patch :update, id: @candidate.id,
+                     topic_id: @topic.id, candidate: { title: "updated_title" }
       assert_redirected_to topic_path(@topic)
     end
 
     it "redirects to new page if title is empty" do
-      patch :update, id: @candidate.id, topic_id: @topic.id, candidate: { title: "" }
+      patch :update, id: @candidate.id,
+                     topic_id: @topic.id, candidate: { title: "" }
       assert_redirected_to edit_topic_candidate_path(@topic, @candidate)
     end
   end
