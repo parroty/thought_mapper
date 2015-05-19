@@ -35,7 +35,7 @@ class FactorsController < ApplicationController
         notice = "Factor was successfully created."
         format.html { redirect_to topic_path(@factor.topic), notice: notice }
       else
-        format.html { render :new }
+        format.html { redirect_to new_topic_factor_path(@factor.topic) }
       end
     end
   end
@@ -46,7 +46,7 @@ class FactorsController < ApplicationController
         notice = "Factor was successfully updated."
         format.html { redirect_to topic_path(@topic), notice: notice }
       else
-        format.html { render :edit }
+        format.html { redirect_to edit_topic_factor_path(@topic, @factor) }
       end
     end
   end

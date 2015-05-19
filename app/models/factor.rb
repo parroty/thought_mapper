@@ -3,6 +3,8 @@ class Factor < ActiveRecord::Base
   belongs_to :candidate
   belongs_to :view_point
 
+  validates :title, presence: true, allow_blank: false
+
   class Score
     LOW    = 1
     MIDDLE = 2
