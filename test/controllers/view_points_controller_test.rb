@@ -24,13 +24,13 @@ describe ViewPointsController do
   describe "create" do
     it "creates view point and gets redirected to topic page" do
       assert_difference "ViewPoint.count", 1, "ViewPoint should be created" do
-        post :create, topic_id: @topic.id, view_point: { title: "title", priority: 1 }
+        post :create, topic_id: @topic.id, view_point: { title: "title" }
       end
       assert_redirected_to topic_path(@topic)
     end
 
-    it "redirects to new page if title and priority are empty" do
-      post :create, topic_id: @topic.id, view_point: { title: "", priority: "" }
+    it "redirects to new page if title is empty" do
+      post :create, topic_id: @topic.id, view_point: { title: "" }
       assert_redirected_to new_topic_view_point_path(@topic)
     end
   end
@@ -38,19 +38,19 @@ describe ViewPointsController do
   describe "update" do
     before do
       ViewPoint.delete_all
-      @view_point = ViewPoint.create(topic_id: @topic.id, title: "title", priority: 1)
+      @view_point = ViewPoint.create(topic_id: @topic.id, title: "title")
     end
 
     it "updates view point and gets redirected to topic page" do
       patch :update, id: @view_point.id, topic_id: @topic.id,
-                     view_point: { title: "updated_title", priority: 2 }
+                     view_point: { title: "updated_title" }
 
       assert_redirected_to topic_path(@topic)
     end
 
     it "redirects to new page if title is empty" do
       patch :update, id: @view_point.id, topic_id: @topic.id,
-                     view_point: { title: "", priority: "" }
+                     view_point: { title: "" }
 
       assert_redirected_to edit_topic_view_point_path(@topic, @view_point)
     end

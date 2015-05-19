@@ -4,5 +4,4 @@ class ViewPoint < ActiveRecord::Base
   acts_as_list scope: :topic
 
   validates :title, presence: true, allow_blank: false
-  validates :priority, presence: true, allow_blank: false
 end

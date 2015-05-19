@@ -12,18 +12,16 @@ describe "operations for viewpoints", :capybara do
       click_link("New View Point")
 
       fill_in "Title", with: "new_view_point_title"
-      fill_in "Priority", with: 1
       click_button("Save")
 
       assert_equal 1, ViewPoint.count
       assert_equal "new_view_point_title", ViewPoint.first.title
-      assert_equal 1, ViewPoint.first.priority
     end
   end
 
   describe "update and delete" do
     before do
-      ViewPoint.create(topic_id: @topic.id, title: "original_title", priority: 1)
+      ViewPoint.create(topic_id: @topic.id, title: "original_title")
     end
 
     it "updates view point" do
@@ -31,12 +29,10 @@ describe "operations for viewpoints", :capybara do
       click_link("original_title")
 
       fill_in "Title", with: "updated_view_point_title"
-      fill_in "Priority", with: 2
       click_button("Save")
 
       assert_equal 1, ViewPoint.count
       assert_equal "updated_view_point_title", ViewPoint.first.title
-      assert_equal 2, ViewPoint.first.priority
     end
 
     it "deletes view point" do
@@ -51,8 +47,8 @@ describe "operations for viewpoints", :capybara do
 
   describe "move" do
     before do
-      @view_point1 = ViewPoint.create(topic_id: @topic.id, title: "title1", priority: 1)
-      @view_point2 = ViewPoint.create(topic_id: @topic.id, title: "title2", priority: 2)
+      @view_point1 = ViewPoint.create(topic_id: @topic.id, title: "title1")
+      @view_point2 = ViewPoint.create(topic_id: @topic.id, title: "title2")
     end
 
     it "moves view point lower" do

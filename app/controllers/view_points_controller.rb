@@ -75,6 +75,6 @@ class ViewPointsController < ApplicationController
   end
 
   def view_point_params
-    params.require(:view_point).permit(:title, :priority)
+    params.require(:view_point).permit(:title)
   end
 end
