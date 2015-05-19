@@ -17,7 +17,7 @@ class Factor < ActiveRecord::Base
 
     def self.all
       constants.map do |name|
-        Score.new(name.capitalize, const_get(name))
+        Score.new(name.to_s.capitalize, const_get(name))
       end
     end
 
@@ -27,7 +27,7 @@ class Factor < ActiveRecord::Base
     end
   end
 
-  def self.scores_as_list
+  def self.all_scores_list
     Score.all.map { |score| [score.name, score.value] }
   end
 

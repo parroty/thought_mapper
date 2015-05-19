@@ -15,7 +15,7 @@
     <%= f.input :score,
                 label_html: { class: "col-xs-12 col-sm-2" } do %>
       <%= f.select :score,
-                   Factor.scores_as_list,
+                   Factor.all_scores_list,
                    {},
                    { class: "col-xs-12 col-sm-10" } %>
     <% end %>
