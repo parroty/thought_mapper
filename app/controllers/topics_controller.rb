@@ -1,11 +1,15 @@
 class TopicsController < ApplicationController
-  before_action :set_topic, only: [:show, :edit, :update, :destroy]
+  before_action :set_topic, only: [:edit, :update, :destroy]
 
   def index
     @topics = Topic.order("updated_at DESC")
   end
 
   def show
+    @topic = Topic.includes(candidates: [:topic])
+      .includes(view_points: [:topic])
+      .includes(factors: [:view_point, :candidate])
+      .find(params[:id])
   end
 
   def new

@@ -3,7 +3,7 @@ class CandidatesController < ApplicationController
     :show, :edit, :update, :destroy, :move_higher, :move_lower]
 
   def index
-    @topic = Topic.find(params[:topic_id])
+    @topic = Topic.includes(candidates: [:topic]).find(params[:topic_id])
     @candidates = @topic.candidates
   end
 

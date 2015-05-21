@@ -3,7 +3,7 @@ class ViewPointsController < ApplicationController
     :show, :edit, :update, :destroy, :move_higher, :move_lower]
 
   def index
-    @topic = Topic.find(params[:topic_id])
+    @topic = Topic.includes(view_points: [:topic]).find(params[:topic_id])
     @view_points = @topic.view_points
   end
 

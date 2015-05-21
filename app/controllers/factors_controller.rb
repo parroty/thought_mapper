@@ -1,6 +1,6 @@
 class FactorsController < ApplicationController
-  before_action :set_factor_and_topic, only: [
-    :show, :edit, :update, :destroy]
+  before_action :set_factor_and_topic,
+                only: [:show, :update, :destroy]
 
   def index
     @topic = Topic.find(params[:topic_id])
@@ -13,19 +13,23 @@ class FactorsController < ApplicationController
   end
 
   def new
-    @factor = Factor.new(topic_id: params[:topic_id])
-    @factor.view_point = ViewPoint.new(id: params[:view_point])
-    @factor.candidate  = Candidate.new(id: params[:candidate])
+    @factor = Factor.new(
+      topic_id: params[:topic_id],
+      view_point_id: params[:view_point],
+      candidate_id: params[:candidate]
+    )
 
-    @topic = @factor.topic
-
-    @view_points = @topic.view_points
-    @candidates  = @topic.candidates
+    @topic = Topic.includes(:candidates)
+      .includes(:view_points)
+      .find(params[:topic_id])
   end
 
   def edit
-    @view_points = @topic.view_points
-    @candidates  = @topic.candidates
+    @factor = Factor.find(params[:id])
+
+    @topic = Topic.includes(:candidates)
+      .includes(:view_points)
+      .find(@factor.topic_id)
   end
 
   def create

@@ -24,7 +24,7 @@
     <%= f.input :view_point,
                 label_html: { class: "col-xs-12 col-sm-2" } do %>
       <%= f.select :view_point_id,
-                   @view_points.map { |r| [r.title, r.id] },
+                   @topic.view_points.map { |r| [r.title, r.id] },
                    {},
                    { class: "col-xs-12 col-sm-10" } %>
     <% end %>
@@ -33,7 +33,7 @@
     <%= f.input :candidate,
                 label_html: { class: "col-xs-12 col-sm-2" } do %>
       <%= f.select :candidate_id,
-                   @candidates.map { |r| [r.title, r.id] },
+                   @topic.candidates.map { |r| [r.title, r.id] },
                    {},
                    { class: "col-xs-12 col-sm-10" } %>
     <% end %>

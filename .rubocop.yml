@@ -12,6 +12,10 @@ AllCops:
 Style/StringLiterals:
   EnforcedStyle: double_quotes
 
+Style/MultilineOperationIndentation:
+   Enabled: true
+   EnforcedStyle: indented
+
 GuardClause:
   MinBodyLength: 4
 
