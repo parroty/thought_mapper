@@ -1,0 +1,21 @@
+<% if candidate.first? %>
+    <i class="fa fa-arrow-left inactive"></i>
+<% else %>
+  <%= link_to move_higher_topic_candidate_path(candidate.topic, candidate),
+        :method => :post, :id => "candidate_move_higher_#{candidate.id}" do %>
+    <i class="fa fa-arrow-left"></i>
+  <% end %>
+<% end %>
+
+<% if candidate.last? %>
+    <i class="fa fa-arrow-right inactive"></i>
+<% else %>
+  <%= link_to move_lower_topic_candidate_path(candidate.topic, candidate),
+        :method => :post, :id => "candidate_move_lower_#{candidate.id}" do %>
+    <i class="fa fa-arrow-right"></i>
+  <% end %>
+<% end %>
+
+<%= link_to candidate.title,
+            edit_topic_candidate_path(@topic, candidate),
+            class: "candidate_link" %>

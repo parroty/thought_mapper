@@ -10,26 +10,12 @@
   </div>
 <% end %>
 
-<div class="panel panel-default">
-  <div class="panel-heading"><b>Summary</b></div>
-  <table class="table table-bordered">
-    <tr>
-      <th class="col-md-2 active">Title</th>
-      <td class="col-md-10"><%= @topic.title %></td>
-    </tr>
-    <tr>
-      <th class="col-md-2 active">Description</th>
-      <td class="col-md-10"><%= @topic.description %></td>
-    </tr>
-    <tr>
-      <th class="col-md-2 active">Comment</th>
-      <td class="col-md-10"><%= simple_format(@topic.comment) %></td>
-    </tr>
-  </table>
-</div>
+<%= render :partial => "show_summary", locals: {topic: @topic} %>
 
 <div class="panel panel-default">
-  <div class="panel-heading"><b>Matrix of </b> <%= link_to pluralize(@topic.factors_count, "factors"), topic_factors_path(@topic) %></div>
+  <div class="panel-heading">
+    <b>Matrix of </b> <%= link_to pluralize(@topic.factors_count, "factors"), topic_factors_path(@topic) %>
+  </div>
   <table class="table table-bordered table-hover">
     <tr>
       <td rowspan="2" colspan="2"></td>
@@ -41,29 +27,9 @@
     </tr>
     <tr>
       <% @topic.candidates.each do |candidate| %>
-      <td>
-        <% if candidate.first? %>
-            <i class="fa fa-arrow-left inactive"></i>
-        <% else %>
-          <%= link_to move_higher_topic_candidate_path(candidate.topic, candidate),
-                :method => :post, :id => "candidate_move_higher_#{candidate.id}" do %>
-            <i class="fa fa-arrow-left"></i>
-          <% end %>
-        <% end %>
-
-        <% if candidate.last? %>
-            <i class="fa fa-arrow-right inactive"></i>
-        <% else %>
-          <%= link_to move_lower_topic_candidate_path(candidate.topic, candidate),
-                :method => :post, :id => "candidate_move_lower_#{candidate.id}" do %>
-            <i class="fa fa-arrow-right"></i>
-          <% end %>
-        <% end %>
-
-        <%= link_to candidate.title,
-                    edit_topic_candidate_path(@topic, candidate),
-                    class: "candidate_link" %>
-      </td>
+        <td>
+          <%= render :partial => "show_candidate", locals: {candidate: candidate} %>
+        </td>
       <% end %>
     </tr>
 
@@ -76,29 +42,11 @@
             <% end %>
           </td>
         <% end %>
+
         <td>
-          <% if view_point.first? %>
-              <i class="fa fa-arrow-up inactive"></i>
-          <% else %>
-            <%= link_to move_higher_topic_view_point_path(view_point.topic, view_point),
-                  :method => :post, :id => "view_point_move_higher_#{view_point.id}" do %>
-              <i class="fa fa-arrow-up"></i>
-            <% end %>
-          <% end %>
-
-          <% if view_point.last? %>
-              <i class="fa fa-arrow-down inactive"></i>
-          <% else %>
-            <%= link_to move_lower_topic_view_point_path(view_point.topic, view_point),
-                  :method => :post, :id => "view_point_move_lower_#{view_point.id}" do %>
-              <i class="fa fa-arrow-down"></i>
-            <% end %>
-          <% end %>
-
-          <%= link_to view_point.title,
-                      edit_topic_view_point_path(@topic, view_point),
-                      class: "view_point_link" %>
+          <%= render :partial => "show_view_point", locals: {view_point: view_point} %>
         </td>
+
         <% @topic.candidates.each do |candidate| %>
           <td>
             <ul>

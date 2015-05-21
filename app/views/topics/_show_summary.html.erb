@@ -1,0 +1,17 @@
+<div class="panel panel-default">
+  <div class="panel-heading"><b>Summary</b></div>
+  <table class="table table-bordered">
+    <tr>
+      <th class="col-md-2 active">Title</th>
+      <td class="col-md-10"><%= topic.title %></td>
+    </tr>
+    <tr>
+      <th class="col-md-2 active">Description</th>
+      <td class="col-md-10"><%= topic.description %></td>
+    </tr>
+    <tr>
+      <th class="col-md-2 active">Comment</th>
+      <td class="col-md-10"><%= simple_format(topic.comment) %></td>
+    </tr>
+  </table>
+</div>

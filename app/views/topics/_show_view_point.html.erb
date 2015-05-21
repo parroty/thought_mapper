@@ -1,0 +1,21 @@
+<% if view_point.first? %>
+    <i class="fa fa-arrow-up inactive"></i>
+<% else %>
+  <%= link_to move_higher_topic_view_point_path(view_point.topic, view_point),
+        :method => :post, :id => "view_point_move_higher_#{view_point.id}" do %>
+    <i class="fa fa-arrow-up"></i>
+  <% end %>
+<% end %>
+
+<% if view_point.last? %>
+    <i class="fa fa-arrow-down inactive"></i>
+<% else %>
+  <%= link_to move_lower_topic_view_point_path(view_point.topic, view_point),
+        :method => :post, :id => "view_point_move_lower_#{view_point.id}" do %>
+    <i class="fa fa-arrow-down"></i>
+  <% end %>
+<% end %>
+
+<%= link_to view_point.title,
+            edit_topic_view_point_path(@topic, view_point),
+            class: "view_point_link" %>
