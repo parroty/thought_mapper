@@ -19,13 +19,11 @@ class CandidatesController < ApplicationController
   end
 
   def create
-    @candidate = create_candidate
-    @topic = @candidate.topic
-
+    create_candidate_and_topic
     respond_to do |format|
       if @candidate.save
         path   = topic_path(@candidate.topic)
-        notice = "New candidate '#{@candidate.title}' was successfully created."
+        notice = "New candidate '#{@candidate.title}' was created."
         format.html { redirect_to path, notice: notice }
       else
         format.html { render :new, topic_id: @candidate.topic.id }
@@ -37,7 +35,7 @@ class CandidatesController < ApplicationController
     respond_to do |format|
       if @candidate.update(action_params)
         path   = topic_path(@topic)
-        notice = "The candidate '#{@candidate.title}' was successfully updated."
+        notice = "The candidate '#{@candidate.title}' was updated."
         format.html { redirect_to path, notice: notice }
       else
         format.html { render :edit, topic_id: @candidate.topic.id }
@@ -49,7 +47,7 @@ class CandidatesController < ApplicationController
     @candidate.destroy
     respond_to do |format|
       path   = topic_path(@topic)
-      notice = "The candidate '#{@candidate.title}' was successfully destroyed."
+      notice = "The candidate '#{@candidate.title}' was destroyed."
       format.html { redirect_to path, notice: notice }
     end
   end
@@ -71,9 +69,10 @@ class CandidatesController < ApplicationController
     @topic = @candidate.topic
   end
 
-  def create_candidate
+  def create_candidate_and_topic
     params_with_topic_id = action_params.merge(topic_id: params[:topic_id])
-    Candidate.new(params_with_topic_id)
+    @candidate = Candidate.new(params_with_topic_id)
+    @topic = @candidate.topic
   end
 
   def action_params
