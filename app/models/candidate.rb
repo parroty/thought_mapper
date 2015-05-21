@@ -4,4 +4,5 @@ class Candidate < ActiveRecord::Base
   acts_as_list scope: :topic
 
   validates :title, presence: true, allow_blank: false
+  validates :title, uniqueness: { scope: :topic }
 end

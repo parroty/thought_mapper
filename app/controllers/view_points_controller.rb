@@ -20,13 +20,15 @@ class ViewPointsController < ApplicationController
 
   def create
     @view_point = create_view_point
+    @topic = @view_point.topic
+
     respond_to do |format|
       if @view_point.save
         path   = topic_path(@view_point.topic)
-        notice = "ViewPoint was successfully created."
+        notice = "New view point '#{@view_point.title}' was successfully created."
         format.html { redirect_to path, notice: notice }
       else
-        format.html { redirect_to new_topic_view_point_path(@view_point.topic) }
+        format.html { render :new, topic_id: @view_point.topic.id }
       end
     end
   end
@@ -35,11 +37,10 @@ class ViewPointsController < ApplicationController
     respond_to do |format|
       if @view_point.update(view_point_params)
         path   = topic_path(@topic)
-        notice = "ViewPoint was successfully updated."
+        notice = "The view point '#{@view_point.title}' was successfully updated."
         format.html { redirect_to path, notice: notice }
       else
-        path = edit_topic_view_point_path(@view_point.topic, @view_point)
-        format.html { redirect_to path }
+        format.html { render :edit, topic_id: @view_point.topic.id }
       end
     end
   end
@@ -48,7 +49,7 @@ class ViewPointsController < ApplicationController
     @view_point.destroy
     respond_to do |format|
       path   = topic_path(@topic)
-      notice = "ViewPoint was successfully destroyed."
+      notice = "The view point '#{@view_point.title}' was successfully destroyed."
       format.html { redirect_to(path, notice: notice) }
     end
   end

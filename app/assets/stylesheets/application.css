@@ -70,3 +70,7 @@ span.high {
   font-weight: bold;
   color: red;
 }
+
+span.error {
+  color: red;
+}

@@ -8,6 +8,7 @@ describe ViewPointsController do
   describe "index" do
     it "gets index page" do
       get :index, topic_id: @topic.id
+
       assert_response :success
       must_render_template :index
     end
@@ -16,6 +17,7 @@ describe ViewPointsController do
   describe "new" do
     it "gets new page" do
       get :index, topic_id: @topic.id
+
       assert_response :success
       must_render_template :index
     end
@@ -29,9 +31,11 @@ describe ViewPointsController do
       assert_redirected_to topic_path(@topic)
     end
 
-    it "redirects to new page if title is empty" do
+    it "remains in new page due to an error if title is empty" do
       post :create, topic_id: @topic.id, view_point: { title: "" }
-      assert_redirected_to new_topic_view_point_path(@topic)
+
+      assert_response :success
+      must_render_template :new
     end
   end
 
@@ -48,11 +52,12 @@ describe ViewPointsController do
       assert_redirected_to topic_path(@topic)
     end
 
-    it "redirects to new page if title is empty" do
+    it "remains in edit page due to an error if title is empty" do
       patch :update, id: @view_point.id, topic_id: @topic.id,
                      view_point: { title: "" }
 
-      assert_redirected_to edit_topic_view_point_path(@topic, @view_point)
+      assert_response :success
+      must_render_template :edit
     end
   end
 end

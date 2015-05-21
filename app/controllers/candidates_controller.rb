@@ -18,20 +18,17 @@ class CandidatesController < ApplicationController
   def edit
   end
 
-  def create_candidate
-    params_with_topic_id = action_params.merge(topic_id: params[:topic_id])
-    Candidate.new(params_with_topic_id)
-  end
-
   def create
     @candidate = create_candidate
+    @topic = @candidate.topic
+
     respond_to do |format|
       if @candidate.save
         path   = topic_path(@candidate.topic)
-        notice = "Candidate was successfully created."
+        notice = "New candidate '#{@candidate.title}' was successfully created."
         format.html { redirect_to path, notice: notice }
       else
-        format.html { redirect_to new_topic_candidate_path(@candidate.topic) }
+        format.html { render :new, topic_id: @candidate.topic.id }
       end
     end
   end
@@ -40,11 +37,10 @@ class CandidatesController < ApplicationController
     respond_to do |format|
       if @candidate.update(action_params)
         path   = topic_path(@topic)
-        notice = "Topic was successfully updated."
+        notice = "The candidate '#{@candidate.title}' was successfully updated."
         format.html { redirect_to path, notice: notice }
       else
-        path = edit_topic_candidate_path(@candidate.topic, @candidate)
-        format.html { redirect_to path }
+        format.html { render :edit, topic_id: @candidate.topic.id }
       end
     end
   end
@@ -53,7 +49,7 @@ class CandidatesController < ApplicationController
     @candidate.destroy
     respond_to do |format|
       path   = topic_path(@topic)
-      notice = "Topic was successfully destroyed."
+      notice = "The candidate '#{@candidate.title}' was successfully destroyed."
       format.html { redirect_to path, notice: notice }
     end
   end
@@ -73,6 +69,11 @@ class CandidatesController < ApplicationController
   def set_candidate_and_topic
     @candidate = Candidate.find(params[:id])
     @topic = @candidate.topic
+  end
+
+  def create_candidate
+    params_with_topic_id = action_params.merge(topic_id: params[:topic_id])
+    Candidate.new(params_with_topic_id)
   end
 
   def action_params

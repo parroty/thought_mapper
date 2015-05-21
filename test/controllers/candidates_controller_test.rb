@@ -8,6 +8,7 @@ describe CandidatesController do
   describe "index" do
     it "gets index page" do
       get :index, topic_id: @topic.id
+
       assert_response :success
       must_render_template :index
     end
@@ -16,6 +17,7 @@ describe CandidatesController do
   describe "new" do
     it "gets new page" do
       get :index, topic_id: @topic.id
+
       assert_response :success
       must_render_template :index
     end
@@ -29,9 +31,11 @@ describe CandidatesController do
       assert_redirected_to topic_path(@topic)
     end
 
-    it "redirects to new page if title is empty" do
+    it "remains in new page due to an error if title is empty" do
       post :create, topic_id: @topic.id, candidate: { title: "" }
-      assert_redirected_to new_topic_candidate_path(@topic)
+
+      assert_response :success
+      must_render_template :new
     end
   end
 
@@ -42,15 +46,18 @@ describe CandidatesController do
     end
 
     it "updates candidate and gets redirected to topic page" do
-      patch :update, id: @candidate.id,
-                     topic_id: @topic.id, candidate: { title: "updated_title" }
+      patch :update, id: @candidate.id, topic_id: @topic.id,
+                     candidate: { title: "updated_title" }
+
       assert_redirected_to topic_path(@topic)
     end
 
-    it "redirects to new page if title is empty" do
-      patch :update, id: @candidate.id,
-                     topic_id: @topic.id, candidate: { title: "" }
-      assert_redirected_to edit_topic_candidate_path(@topic, @candidate)
+    it "remains in edit page due to an error if title is empty" do
+      patch :update, id: @candidate.id, topic_id: @topic.id,
+                     candidate: { title: "" }
+
+      assert_response :success
+      must_render_template :edit
     end
   end
 end
