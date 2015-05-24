@@ -2,6 +2,8 @@ class CandidatesController < ApplicationController
   before_action :set_candidate_and_topic, only: [
     :show, :edit, :update, :destroy, :move_higher, :move_lower]
 
+  include Axis
+
   def index
     @topic = Topic.includes(candidates: [:topic]).find(params[:topic_id])
     @candidates = @topic.candidates
@@ -20,36 +22,18 @@ class CandidatesController < ApplicationController
 
   def create
     create_candidate_and_topic
-    respond_to do |format|
-      if @candidate.save
-        path   = topic_path(@candidate.topic)
-        notice = "New candidate '#{@candidate.title}' was created."
-        format.html { redirect_to path, notice: notice }
-      else
-        format.html { render :new, topic_id: @candidate.topic.id }
-      end
-    end
+    notice = "New candidate '#{@candidate.title}' was created."
+    process_create(@candidate, notice)
   end
 
   def update
-    respond_to do |format|
-      if @candidate.update(action_params)
-        path   = topic_path(@topic)
-        notice = "The candidate '#{@candidate.title}' was updated."
-        format.html { redirect_to path, notice: notice }
-      else
-        format.html { render :edit, topic_id: @candidate.topic.id }
-      end
-    end
+    notice = "The candidate '#{@candidate.title}' was updated."
+    process_update(@candidate, candidate_params, notice)
   end
 
   def destroy
-    @candidate.destroy
-    respond_to do |format|
-      path   = topic_path(@topic)
-      notice = "The candidate '#{@candidate.title}' was destroyed."
-      format.html { redirect_to path, notice: notice }
-    end
+    notice = "The candidate '#{@candidate.title}' was destroyed."
+    process_destroy(@candidate, notice)
   end
 
   def move_higher
@@ -70,12 +54,12 @@ class CandidatesController < ApplicationController
   end
 
   def create_candidate_and_topic
-    params_with_topic_id = action_params.merge(topic_id: params[:topic_id])
+    params_with_topic_id = candidate_params.merge(topic_id: params[:topic_id])
     @candidate = Candidate.new(params_with_topic_id)
     @topic = @candidate.topic
   end
 
-  def action_params
+  def candidate_params
     params.require(:candidate).permit(:title)
   end
 end

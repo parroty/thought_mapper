@@ -2,6 +2,8 @@ class ViewPointsController < ApplicationController
   before_action :set_view_point_and_topic, only: [
     :show, :edit, :update, :destroy, :move_higher, :move_lower]
 
+  include Axis
+
   def index
     @topic = Topic.includes(view_points: [:topic]).find(params[:topic_id])
     @view_points = @topic.view_points
@@ -20,36 +22,18 @@ class ViewPointsController < ApplicationController
 
   def create
     create_view_point_and_topic
-    respond_to do |format|
-      if @view_point.save
-        path   = topic_path(@view_point.topic)
-        notice = "New view point '#{@view_point.title}' was created."
-        format.html { redirect_to path, notice: notice }
-      else
-        format.html { render :new, topic_id: @view_point.topic.id }
-      end
-    end
+    notice = "New view point '#{@view_point.title}' was created."
+    process_create(@view_point, notice)
   end
 
   def update
-    respond_to do |format|
-      if @view_point.update(view_point_params)
-        path   = topic_path(@topic)
-        notice = "The view point '#{@view_point.title}' was updated."
-        format.html { redirect_to path, notice: notice }
-      else
-        format.html { render :edit, topic_id: @view_point.topic.id }
-      end
-    end
+    notice = "The view point '#{@view_point.title}' was updated."
+    process_update(@view_point, view_point_params, notice)
   end
 
   def destroy
-    @view_point.destroy
-    respond_to do |format|
-      path   = topic_path(@topic)
-      notice = "The view point '#{@view_point.title}' was destroyed."
-      format.html { redirect_to(path, notice: notice) }
-    end
+    notice = "The view point '#{@view_point.title}' was destroyed."
+    process_destroy(@view_point, notice)
   end
 
   def move_higher
