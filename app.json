@@ -1,0 +1,8 @@
+{
+  "name": "thought_mapper",
+  "description": "Thinking assistant tool on comparing options.",
+  "scripts": {
+    "postdeploy": "bundle exec rake db:migrate"
+  },
+  "addons": []
+}
