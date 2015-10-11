@@ -8,6 +8,9 @@
 [coveralls]: https://coveralls.io/r/parroty/thought_mapper
 [codeclimate]: https://codeclimate.com/github/parroty/thought_mapper
 
+### Summary
+Thinking assistant tool on comparing options. Listing candidates of options and viewpoints to compare and prioritize them.
+
 ### Sample Screenshot
 [![screenshot](https://gist.githubusercontent.com/parroty/624e44790cf7e35b22f7/raw/700cfb3cace24ffe279553497829a1615857d857/thought_mapper.png)](https://github.com/parroty/thought_mapper)
 
